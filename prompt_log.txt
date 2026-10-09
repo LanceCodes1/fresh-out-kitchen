@@ -365,3 +365,22 @@ Outstanding evidence:
 
 Actions restricted to README.md and this appended log. No application functionality or ignore rules changed. No feature/dependency introduced. No staging or commit performed. Awaiting user review of the proposed baseline.
 - Final verification after documentation updates passed README coverage for all six shortcuts, Recipes navigation, shared test key, and user-reported evidence; whitespace scan across all six files; unchanged SHA-256 hashes for index.html/style.css/script.js/.gitignore; empty Git index. git diff --check returned exit code 0, with explicit whitespace scanning covering untracked contents. Final status: no commits yet on main; all six proposed files untracked.
+
+
+V10 — USER-PERFORMED BROWSER VERIFICATION DOCUMENTATION
+Date: 2026-10-08
+
+Prompt: Update only README.md and prompt_log.txt with the supplied user-performed browser tests; distinguish screenshots from verbal confirmations, invent no missing evidence, and do not modify application files, stage, commit, push, or deploy.
+
+Evidence source: User's textual confirmation in this update. No screenshots supplied with this message; no new screenshot-based findings or independent agent browser results are claimed.
+- 375px: Hero, search, recipe results, and recipe dialog visually inspected.
+- 320px: Homepage visually inspected only. Full recipe/results/dialog verification at this width is not established by the recorded evidence.
+- 768px: Recipe grid visually inspected with two-column layout.
+- Invalid meal search: Friendly no-results message displayed.
+- Chrome DevTools Offline: API requests failed; friendly connection-error message displayed.
+- Network restored: Chicken search succeeded with HTTP 200; recipe cards reappeared.
+- Earlier browser tests: Pasta shortcut, Recipes navigation, and recipe dialog passed, as confirmed verbally in this update. No browser, viewport, screenshot, or keyboard detail inferred for those earlier tests.
+
+Actions: Updated README verification notes and remaining manual-coverage list; appended this entry while preserving prior log entries. Previous statements about missing evidence remain historical records and are supplemented by these new user confirmations. No application tests were rerun and no browser/live API test was performed by the agent in this documentation-only update.
+
+Documentation verification: Passed exact changed-file comparison (README.md and prompt_log.txt only), prior-log prefix preservation, whitespace checks, and unchanged Git index. No staging, commit, push, or deployment performed.

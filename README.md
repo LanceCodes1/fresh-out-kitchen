@@ -56,18 +56,27 @@ Automated checks rerun during milestone preparation:
 
 The simulated checks do not verify rendered layout, native form validation, native dialog focus containment, screen reader announcements, or real browser networking. The temporary test harness is outside the repository; it is not included in this baseline.
 
-User-reported browser evidence: live recipe search and recipe dialog testing passed, and the photograph-overlap correction was visually verified. The user also reported that V8 visual review was completed. Browser names, viewport sizes, and a detailed V8 interaction checklist have not been supplied. No independent agent browser test or live API request was performed during milestone preparation. Earlier image provenance verification is recorded in `prompt_log.txt`.
+User-performed browser evidence (confirmed verbally by the user; no screenshots were supplied with this update):
 
-Suggested manual review before committing:
+| Scenario | Reported result |
+| --- | --- |
+| 375px viewport | Hero, search, recipe results, and recipe dialog visually inspected. |
+| 320px viewport | Homepage visually inspected. Full recipe/results/dialog verification at this width is not established. |
+| 768px viewport | Recipe grid visually inspected with a two-column layout. |
+| Invalid meal search | Friendly no-results message displayed. |
+| Chrome DevTools Offline | API requests failed and the app displayed a friendly connection-error message. |
+| Network restored | Chicken search succeeded with HTTP 200 and recipe cards reappeared. |
+| Earlier browser tests | Pasta shortcut, Recipes navigation, and recipe dialog passed. |
 
-- Search chicken, select a card, and compare ingredients and instructions with its API response.
-- Search an unlikely name and confirm the no-results message; submit an empty or whitespace-only search.
-- Use browser developer tools to go offline, then search and confirm the retry guidance.
-- Search twice quickly and confirm the latest search wins.
-- Activate all six shortcuts and confirm the input and results match the selected meal name; confirm **Recipes** jumps to the results section.
-- Navigate with Tab, Enter, Space, and Escape; confirm visible focus and focus return after closing a recipe.
-- Review at 375px and 1280px widths and at 200% browser zoom; confirm readable text, usable controls, and no horizontal scrolling.
-- Check missing photographs, measurements, and instructions using mocked responses in a browser.
+Earlier user reports also confirmed live recipe search/dialog testing and visual verification of the photograph-overlap correction. V8 visual review was reported completed. These are user-performed results, not independent agent browser tests. No screenshot-based conclusion is added here. Browser versions, device details, and checks beyond the reported scenarios remain unspecified.
+
+Remaining manual coverage to document:
+
+- The other five meal-name shortcuts; Pasta is already confirmed.
+- Empty/whitespace-only input and rapid consecutive searches in a real browser.
+- Keyboard navigation, visible focus, Escape dismissal, focus return, and screen reader announcements.
+- Full recipe/results/dialog behavior at 320px, desktop viewport details, and 200% browser zoom.
+- Missing images, measurements, and instructions using controlled browser responses.
 
 ## Known limitations
 
@@ -76,4 +85,4 @@ Suggested manual review before committing:
 - Original instructions are displayed in full, preserving line breaks; they are not rewritten or expanded into beginner tutorials.
 - Search is by meal name only. There are no filters, favorites, accounts, or saved recipes.
 - Native HTML dialog support and modern JavaScript are required. Older browsers are not supported.
-- Detailed browser/viewport and interaction evidence remains to be recorded. Screen reader testing and full HTML/accessibility validation have not been performed; automated checks use simulated DOM/network responses.
+- Manual coverage is limited to the user-reported scenarios above. Keyboard/screen reader outcomes and full HTML/accessibility validation remain unverified; automated checks use simulated DOM/network responses.
