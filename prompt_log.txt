@@ -1,0 +1,367 @@
+Fresh Out Kitchen — Prompt and implementation log
+
+INITIAL BUILD ITERATION
+Date: 2026-10-08
+
+Original implementation prompt (verbatim):
+You are my AI coding agent for Fresh Out Kitchen, a beginner-friendly recipe discovery application.
+
+TECH STACK
+HTML5, CSS3, vanilla JavaScript, and TheMealDB public API only. No frameworks, backend, database, authentication, or additional APIs.
+
+MVP REQUIREMENTS
+1. Search meals by name using TheMealDB search.php?s= endpoint.
+2. Display responsive recipe cards with meal photographs and names.
+3. Let users select a card to view the recipe, including ingredients, corresponding measurements, and full cooking instructions.
+4. Handle loading, empty search results, network failures, and malformed or missing API data gracefully.
+5. Support mobile and desktop screen sizes.
+
+DESIGN
+Create a polished culinary interface with warm cream backgrounds, deep forest green, terracotta/orange accents, elegant serif headings, clean readable body typography, large food photography, rounded cards, generous spacing, and a prominent search bar. Prioritize clear beginner-friendly language and accessible controls. The interface should feel like a thoughtfully designed consumer application, not a generic classroom exercise.
+
+IMPLEMENTATION
+- Use index.html, style.css, and script.js.
+- Use fetch with async/await.
+- Use TheMealDB public API without adding a backend.
+- Map strIngredient1 through strIngredient20 to their corresponding strMeasure fields, ignoring blank ingredients.
+- Safely render API content; avoid inserting untrusted API strings directly as HTML.
+- Use semantic HTML, accessible labels, keyboard-operable controls, visible focus states, and responsive CSS.
+- Handle null meals, HTTP errors, network errors, and missing fields.
+- Keep code understandable for a beginner who must explain it.
+- Add concise comments explaining important logic, not every line.
+- Do not add filters, favorites, saved recipes, accounts, ingredient search, or extra features.
+
+WORKFLOW
+FIRST: Inspect the existing repository and present a concise implementation plan describing file responsibilities, UI structure, API flow, error handling, and verification steps. Do not modify files until I approve the plan.
+
+AFTER APPROVAL: Implement the complete MVP coherently. Inspect changes, explain important decisions, and suggest practical manual tests. Do not claim tests passed unless actually executed.
+
+Update README.md with setup, usage, API information, and known limitations. Maintain prompt_log.txt with accurate prompts, decisions, iterations, and actual verification evidence. Do not fabricate results or reflections.
+
+Keep scope tightly focused on delivering the required MVP by Friday morning.
+
+Inspection observations:
+- index.html, style.css, script.js, README.md, and prompt_log.txt existed, were empty, and were untracked.
+- No applicable AGENTS.md instructions were found in the repository or inspected parent directories.
+- No files were modified before plan approval.
+
+Approved plan:
+1. index.html: branded header, introduction, labeled search form, status area, results section, and accessible recipe dialog.
+2. style.css: cream, forest green, and terracotta palette; system serif headings and readable body fonts; rounded photo cards; generous spacing; responsive layouts and visible focus states.
+3. script.js: async/await fetch to search.php?s= with encoded meal names; safe DOM rendering; recipe dialog; pair ingredient and measurement fields 1–20, ignoring blank ingredients.
+4. Handle loading, no results, HTTP/network failures, malformed responses, missing fields/images, and stale responses; keyboard dismissal and focus restoration for dialog.
+5. Update README and this log; inspect changes and execute available syntax checks; distinguish executed checks from proposed manual tests.
+
+Approval and follow-up instructions:
+The user approved the plan and requested the complete MVP using the five existing files, with this initial log written before implementation. After implementation, inspect changes, run available syntax checks, document actual decisions and results, report performed/unperformed checks and known issues, show Git status and a concise change summary, and stop for review without committing. No additional features were authorized.
+
+Action: Recorded this initial build log before writing the application files.
+
+Implementation actions and decisions:
+- Implemented the approved page, styling, name search, recipe cards, and recipe dialog in the three application files.
+- Used system fonts and a cream/forest-green/terracotta design without extra APIs or dependencies.
+- Used DOM creation and textContent for API text. Restricted recipe images to HTTPS URLs at www.themealdb.com; missing or failed images show a fallback.
+- Paired numbered ingredient/measurement fields and preserved full instruction text with line breaks.
+- Used native dialog behavior, a close control, and focus restoration. Added semantic labels, live status announcements, focus styling, reduced-motion handling, and responsive CSS.
+- Used AbortController plus request identity checks to prevent stale results.
+- Handled null/empty results, HTTP/network/JSON/schema failures, unusable records, and missing recipe fields.
+- During inspection, changed card content wrappers and titles to span elements so button contents use phrasing content. Expanded CSS declarations for readability.
+- Added setup, usage, API details, verification boundaries, manual review steps, and limitations to README.md.
+
+Actual verification evidence:
+- node --check script.js: passed (exit code 0).
+- Temporary harness /tmp/fresh-out-kitchen-check.cjs using Node VM, simulated DOM, and mocked fetch: passed assertions for blank query handling, URL encoding, literal API text, ingredient pairing and blank skipping, complete instructions, focus restoration handler, null results, HTTP/network/JSON/schema errors, missing fields, and stale response protection. Rerun after inspection adjustments also passed.
+- Initial Python HTML reference check failed because recipe-title is generated by JavaScript rather than present in initial HTML. Adjusted the check to account for that actual dynamic heading assignment; rerun passed HTML parsing, unique IDs, label targets, static/dynamic heading references, and local asset references. This was a limited structural check, not a full HTML validator.
+- Real browser visual checks, mobile/desktop rendering, native dialog keyboard/focus behavior, screen reader checks, and live TheMealDB requests were not performed. Mocked checks do not establish these results.
+- No commit was created.
+- Whitespace scan across all five untracked files: passed. git diff --check returned exit code 0, but does not inspect untracked file contents; the explicit scan covered those files.
+- Final git status --short: all five files remain untracked (?? README.md, ?? index.html, ?? prompt_log.txt, ?? script.js, ?? style.css).
+
+
+V3 AUDIT AND APPROVED CORRECTIONS
+Date: 2026-10-08
+
+Audit findings:
+- Confirmed minor defect: ingredient-only records in slot 1 were accepted, while an otherwise equivalent record in slot 20 was rejected by the recipe validation filter.
+- Confirmed minor defect: the home link targeted a directory under the documented direct-file setup rather than index.html.
+- Browser checks remained unverified: detail image sizing/overflow, responsive layout and long-text overflow, native dialog keyboard/focus behavior, visual consistency, and screen reader announcements. Live API connectivity/CORS and actual photograph loading were also unverified.
+- The original AssertionError was reproduced as a static aria-labelledby target check: recipe-title is generated by JavaScript. The adjusted structural check and a simulated dialog-heading check passed. Neither established browser accessibility.
+- Additional simulated audit checks passed response validation, all 20 ingredient/measurement pairs, CRLF instructions, image fallbacks, request cancellation, and stale-failure protection. One audit harness attempt raised ReferenceError by calling mealPhoto outside its VM context; retrieving the function from that context corrected the harness, and image checks passed.
+
+Approved corrections:
+- Recognize usable ingredients in any numbered field from 1 through 20.
+- Change the home link to ./index.html.
+- Add only .env, .env.*, !.env.example, node_modules/, and .DS_Store to a minimal .gitignore; create no .env file or private credentials.
+- Clarify README wording that the public development API uses shared test key 1 and needs no private environment variable for this MVP.
+- Preserve previous log entries, record actual verification, add no features/dependencies/backend, and leave changes uncommitted pending browser verification.
+
+Actions:
+- Implemented the approved validation loop, home-link correction, .gitignore, and README clarification.
+- Left style.css and the outstanding browser concerns unchanged within this correction scope.
+
+Actual correction verification results:
+- node --check script.js: passed (exit code 0).
+- Original temporary Node VM/simulated-DOM/mocked-fetch regression harness: passed blank-query validation, URL encoding, literal text rendering, ingredient pairing, blank skipping, full instructions, focus restoration handler, null results, HTTP/network/JSON/schema errors, missing fields, and stale-success protection.
+- Additional simulated tests: passed ingredient-only records for every slot 1–20 with matching measurements; passed a recipe with only strIngredient20 populated and no measurement; verified blank/non-string ingredients and measurement-only records still produce an error.
+- Limited Python HTML/reference checks passed: corrected home link, unique IDs, label targets, dynamic recipe-title allowance, and local asset existence. This is not full HTML validation.
+- Exact .gitignore content, absence of .env, and whitespace checks across all six files passed.
+- Git ignore behavior passed: .env, .env.local, node_modules/example.js, and .DS_Store ignored; .env.example not ignored (expected git check-ignore exit code 1). No sample credential or dependency files were created.
+- git diff --check returned exit code 0; files remain untracked, so the explicit whitespace scan supplied content coverage.
+- Inspected resulting validation logic, corrected link, README clarification, ignore rules, and appended log. No automated check remained failing.
+- No browser tests or live API requests were performed during these corrections. Outstanding V3 browser concerns remain unverified.
+- No commit created. Final Git status: ?? .gitignore, ?? README.md, ?? index.html, ?? prompt_log.txt, ?? script.js, ?? style.css. Awaiting browser verification.
+
+
+RECIPE DETAIL LAYOUT CORRECTION
+Date: 2026-10-08
+
+User-reported browser observation:
+- Opening a recipe such as Chicken Mandi showed the large photograph extending behind ingredients and instructions, with dark green text overlapping the photograph. This observation was supplied by the user; the agent has not independently reproduced it in a browser.
+
+Root cause identified before editing:
+- mealPhoto gives both the wrapper and child image the shared meal-photo class. Only the wrapper gets detail-photo. The shared class sets a 4:3 ratio, while detail-photo sets a 16:9 ratio and 360px maximum height. The child therefore can be taller than its wrapper and paint into subsequent recipe content because the wrapper lacked overflow clipping.
+
+Approved correction actions:
+- Updated only dialog-related CSS: positioned/clipped the responsive detail image container and made its child image fill that container with object-fit: cover, overriding the card image ratio.
+- Added an explicit cream background and green foreground to recipe content, a divider beneath the title, and zero-minimum grid columns for long text.
+- Increased ingredient and instruction text to 16px, with explicit ingredient line spacing and preserved instruction line spacing.
+- Added explicit vertical dialog scrolling and a vh maximum-height fallback before dvh.
+- Kept generated markup, API search, ingredient parsing, native dialog controls, focus logic, and responsive breakpoints unchanged.
+
+Actual verification evidence:
+- node --check script.js: passed (exit code 0).
+- Original Node VM/simulated-DOM/mocked-fetch regression harness: passed search validation/encoding, safe text rendering, ingredient pairing/blank skipping, full instructions, focus restoration handler, null results, HTTP/network/JSON/schema errors, missing fields, and stale-result protection.
+- Existing tinycss2 installation parsed the stylesheet, nested media/keyframe rules, and declaration lists without parser errors. No dependency installed. This checks syntax, not browser layout or full CSS property validity.
+- Parsed-rule assertions passed for the clipped/positioned detail container, child image sizing, cream/green content colors, title divider, zero-minimum grid columns, 16px text and line spacing, and explicit dialog overflow/max-height.
+- Simulated dialog DOM test passed: image is inside its own wrapper; title and columns are separate following siblings; a 100-line instruction string is preserved; slot-20 ingredient renders; close handler restores focus. The test does not measure layout, actual scrolling, or native keyboard behavior.
+- Computed contrast for declared #183e32 text on #f8f5ed background: 10.87:1. This is a color calculation, not a rendered accessibility audit.
+- SHA-256 comparisons before/after correction confirmed script.js, index.html, README.md, and .gitignore unchanged. Whitespace scan across six project files passed.
+- Inspected final CSS and DOM construction; git diff --check returned exit code 0 (files remain untracked, with content whitespace covered by the explicit scan).
+- No automated check failed. No browser test or live API request was performed. Actual photograph containment, dialog scrolling, responsive rendering, and keyboard behavior require browser retesting.
+- Updated only style.css and this log for this correction. No commit created. Awaiting browser retesting, especially Chicken Mandi on mobile and desktop with long instructions and keyboard navigation.
+
+SINGLE VISUAL-REFINEMENT ITERATION
+Date: 2026-10-08
+
+User-reported verification before this iteration:
+- Live recipe search and recipe dialog testing passed. The earlier photograph-overlap correction was visually verified by the user. These are user-reported results, not independent agent browser verification.
+
+Requested scope:
+- One focused visual pass to improve hero composition, readable supporting text, search prominence, spacing, card typography/interaction feedback, and overall culinary presentation.
+- Preserve the desktop three-column grid, responsive layouts, corrected dialog, working functionality, and accessibility. No new features, APIs, images, dependencies, or commit.
+
+Actual actions and design decisions:
+- Inspected existing index.html and style.css before editing. Kept markup and JavaScript unchanged; the existing structure supports the visual refinement.
+- Added a rounded ivory hero panel with a restrained warm gradient and static CSS plate-like outline. The outline is noninteractive and hidden on small screens. No photograph, remote resource, or new API was introduced.
+- Increased editorial hero heading size and supporting body text; raised search labels to 16px, search hints to 14px, and mobile search input text to 16px.
+- Made the search form wider with a stronger border, restrained shadow, larger button, and focus-within feedback while retaining visible control focus outlines.
+- Refined hero/results spacing, larger results headings and status text, and an ivory bordered initial/empty-status presentation. Long result headings can wrap.
+- Increased card titles to 27px and supporting labels to 14px. Added restrained border/shadow hover and keyboard-focus feedback plus a circular arrow treatment; removed the previous card lift transform. Kept image sizing and all grid breakpoints unchanged.
+- Preserved every dialog-specific CSS rule, responsive dialog rule, shared meal-photo rule, native controls, and application logic.
+
+Actual verification results:
+- node --check script.js: passed (exit code 0).
+- Existing temporary Node VM/simulated-DOM/mocked-fetch regression harness: passed blank-query validation, query encoding, literal API text, ingredient/measurement pairing, blank skipping, full instruction text, focus restoration handler, null results, HTTP/network/JSON/schema errors, missing-field handling, and stale-result protection.
+- Existing tinycss2 parsed stylesheet and nested media/keyframe declarations without parser errors. No dependency installed. This is syntax inspection, not browser layout verification.
+- Parsed stylesheet comparisons confirmed all dialog/image declarations unchanged, including responsive dialog declarations. Assertions confirmed desktop/tablet/mobile grids remain three/two/one columns and reduced-motion rules remain unchanged.
+- SHA-256 comparisons confirmed script.js, index.html, README.md, and .gitignore unchanged.
+- Initial color checks failed: muted text against proposed #f0e2ce gradient stop was 4.46:1, below the selected 4.5:1 threshold. Lightened that stop to #f4e7d5. A subsequent check found original terracotta #b64c2d against #f6eee2 at 4.49:1; scoped a darker #a74328 accent to the hero.
+- Final declared-color calculations passed: green/ivory 11.64:1; muted text against the checked hero gradient endpoints 4.93:1 and 4.66:1; hero terracotta against those endpoints 5.25:1 and 4.96:1; white/forest-green button 11.84:1. These calculations do not constitute a rendered contrast or accessibility audit.
+- Whitespace scan across all six project files passed. Inspected the complete CSS before/after diff; no automated check remained failing after the contrast corrections.
+- No browser test or live API request was performed by the agent in this iteration. Actual visual hierarchy, mobile overflow, focus appearance, and dialog regression need user browser review.
+- Updated only style.css and this log. No feature, dependency, image source, backend, or commit added. Stopped for browser review after this single visual iteration.
+
+V7 PREMIUM SPLIT HERO REFINEMENT
+Date: 2026-10-08
+
+User prompt (verbatim):
+FRESH OUT KITCHEN — V7 PREMIUM SPLIT HERO REFINEMENT
+
+ROLE:
+Act as a senior frontend developer and culinary UI designer. Improve the existing homepage without rebuilding the application.
+
+CONTEXT:
+Fresh Out Kitchen is a beginner-friendly recipe discovery application built with HTML, CSS, vanilla JavaScript, and TheMealDB API. The current V6 design works but its homepage hero is visually plain. The user has approved Option A: a premium split-layout hero.
+
+DESIGN OBJECTIVE:
+Create a polished, modern culinary homepage inspired by editorial recipe websites.
+
+LAYOUT:
+1. On desktop, create a two-column hero:
+   - Left: introductory eyebrow, prominent serif headline, welcoming description, and recipe search form.
+   - Right: one large, appetizing food photograph with elegant rounded corners.
+2. Keep the existing headline: Your next great meal starts with a search.
+3. Preserve the existing search label, input, button, and meal-name-only functionality.
+4. Make the photograph a visual centerpiece without overwhelming the search experience.
+5. On mobile, stack the hero content vertically, with search remaining easy to access.
+6. Remove the current decorative empty circle and reduce unnecessary whitespace.
+7. Keep the existing header, recipe results, cards, footer, and corrected recipe dialog.
+
+VISUAL SYSTEM:
+- Warm cream/ivory background.
+- Deep forest-green headings.
+- Terracotta/orange accents.
+- Elegant serif headings and readable sans-serif body text.
+- Use the existing visual system, taking inspiration from Lovable's Fraunces/Figtree font pairing and cream/green/terracotta design tokens.
+- Use plain CSS only; do not introduce Tailwind or a build system.
+- Maintain strong contrast, readable font sizes, visible focus states, and responsive behavior.
+
+HERO IMAGE:
+Use one verified, appropriate culinary image from TheMealDB, preferably from a known valid meal response. Do not invent an image URL.
+Keep the image decorative with suitable alt handling if it adds no information beyond the hero text.
+Provide an attractive background fallback if the image fails.
+Do not add another API or require an API key.
+Do not add an extra API request solely for the decorative hero image.
+If a verified image URL is not available, stop and report that limitation rather than inventing one.
+
+TECHNICAL CONSTRAINTS:
+- HTML, CSS, vanilla JavaScript only.
+- No React, TypeScript, Tailwind, backend, database, accounts, or new dependencies.
+- Do not alter working API search logic, ingredient parsing, or recipe dialog behavior.
+- No extra features, animations, or unnecessary UI components.
+
+WORKFLOW:
+1. Inspect the current HTML and CSS.
+2. Explain the proposed minimal changes briefly.
+3. Implement only the approved split hero refinement.
+4. Inspect the resulting changes.
+5. Run available syntax and regression checks.
+6. Update prompt_log.txt with this V7 prompt, actual changes, checks, and limitations. Preserve earlier entries.
+7. Report what passed, what remains unverified, and the files changed.
+
+Do not commit.
+Stop for my browser review.
+
+Actual image verification:
+- Repository inspection found no verified meal image URL to reuse. Web-tool attempts to read Chicken Mandi search and lookup responses returned inaccessible/internal-error results; these did not verify an API response.
+- Found the official meal page https://www.themealdb.com/meal/53358-chicken-mandi-recipe. A direct sandboxed page request failed DNS resolution. Retried with approved network access; page returned HTTP 200 and its meal image src was /images/media/meals/er4d081765186828.jpg.
+- Downloaded https://www.themealdb.com/images/media/meals/er4d081765186828.jpg successfully with curl --fail and visually inspected the downloaded image file: a platter of chicken and rice. This was an image-file inspection, not browser testing of the application.
+- Used that exact verified image URL. Verification came from the official meal page, not a successfully obtained JSON API response. The application adds only an image resource request, no decorative API fetch.
+
+Actual changes:
+- index.html: grouped existing eyebrow/headline/description/search in hero-copy; added one hero-photo container with an empty-alt image and aria-hidden decorative wrapper. Existing headline and search controls preserved.
+- style.css: replaced centered hero/circle with an ivory two-column grid, reduced padding, sized the serif headline for its column, and added a rounded/clipped photograph box with object-fit: cover and warm gradient fallback.
+- At 800px and below, hero becomes one column with search content first and a landscape image below. At narrower desktop sizes the search button can occupy a separate row for usability. Existing recipe grid breakpoints remain unchanged.
+- script.js: appended only an isolated hero image error handler. It removes a failed decorative image to expose the gradient and handles a failure cached before the deferred script runs. Previous application code preserved verbatim; no API/search/ingredient/dialog logic modified.
+- Kept system serif/sans-serif fonts and existing accessible color tokens; no font downloads, new dependencies, animations, backend, or features added.
+- During code inspection, removed an unintended duplicate general eyebrow block introduced while replacing the old hero CSS. Final preservation checks confirmed non-hero styles unchanged.
+
+Actual verification results:
+- node --check script.js: passed (exit code 0).
+- Existing Node VM/simulated-DOM/mocked-fetch regression harness: passed blank-query validation, URL encoding, safe API text, ingredient pairing/blank skipping, full instructions, focus restoration handler, null results, HTTP/network/JSON/schema errors, missing fields, and stale-result protection.
+- Simulated tests passed hero pending image-error handling, cached failure handling, and successful-image preservation. These are handler tests, not browser image-failure tests.
+- CSS parsing with existing tinycss2 passed, including nested media/keyframe declarations. Parsed-rule assertions passed desktop two-column hero, mobile stack, photo clipping/object-fit, and removal of the circle.
+- Parsed-rule comparisons confirmed every pre-existing non-hero CSS declaration unchanged, including header, results, cards, recipe grid, dialog/image rules, footer, focus, and reduced-motion rules.
+- HTML inspection and structural checks passed unchanged header/results/footer/dialog markup, unchanged prior IDs/control attributes, unique IDs, label references, decorative image markup, and search-before-image document order. Not full HTML validation.
+- Verified pre-existing script.js content preserved verbatim before the appended hero handler. README.md and .gitignore hashes unchanged. Whitespace checks across all six files passed.
+- Inspected resulting HTML/CSS and before/after changes. No application syntax or regression check failed. Network/API verification limitations are documented above.
+- No application browser test performed in this iteration; desktop/mobile composition, actual hero load/failure, visual crop, overflow, and keyboard behavior remain for user browser review.
+- Files changed: index.html, style.css, script.js, prompt_log.txt. No commit created. Stopped for browser review.
+
+V8 FINAL UI REFINEMENT
+Date: 2026-10-08
+
+User prompt (verbatim):
+FRESH OUT KITCHEN — V8 FINAL UI REFINEMENT
+
+ROLE:
+Act as a senior frontend engineer improving the existing Fresh Out Kitchen application.
+
+GOAL:
+Bring the existing V7 design closer to the Lovable prototype through stronger forest-green contrast, refined search interactions, and subtle visual feedback. Preserve all verified functionality.
+
+DESIGN CHANGES:
+1. Keep the approved split hero and existing culinary photograph.
+2. Introduce more deep forest green into the page, particularly the header, section accents, and empty-results presentation. Balance it with warm cream and terracotta. Avoid making the page excessively dark.
+3. Improve the search form focus state using :focus-within so the entire rounded search container receives a clear, accessible focus ring. Remove the visually distracting inner rectangular outline while retaining strong keyboard focus visibility.
+4. Add six small, accessible meal-name shortcut buttons below the search form: Chicken, Pasta, Rice, Beef, Soup, Egg. Clicking one must populate the existing input and trigger the same meal-name search handler. No ingredient searching, new API endpoints, or separate search logic.
+5. Add a simple Recipes navigation link in the existing header that scrolls to the results section. Use the existing results section ID or a stable anchor.
+6. Refine the initial empty-results panel so it feels intentionally designed rather than like a plain placeholder. Use stronger contrast, thoughtful typography, and restrained CSS decoration.
+7. Add subtle hover and focus feedback to recipe cards, shortcut buttons, and navigation links. Keep animations brief and respect prefers-reduced-motion.
+8. Improve secondary text readability and maintain responsive layouts.
+
+SCOPE GUARDRAILS:
+- No Kitchen Basics page or cooking lessons.
+- No new APIs, dependencies, frameworks, accounts, storage, or backend.
+- No changes to ingredient parsing or recipe dialog logic.
+- Keep HTML, CSS, and vanilla JavaScript.
+- Preserve the existing API search, loading, no-results, and error handling.
+- Maintain semantic HTML and keyboard accessibility.
+- Avoid unnecessary decorative elements or feature expansion.
+
+VERIFICATION:
+Inspect the current code before modifying it.
+Implement the smallest coherent changes.
+Run available syntax and regression checks.
+Confirm shortcut buttons call the existing search logic.
+Check navigation anchors and accessible focus behavior at the code level.
+Clearly distinguish automated verification from browser testing.
+Append the V8 prompt, actual changes, and actual verification results to prompt_log.txt.
+Do not commit.
+Stop for browser review.
+
+Actual changes and decisions:
+- Inspected current HTML, JavaScript, CSS, and recent log before editing.
+- Kept the V7 split hero, verified Chicken Mandi photograph, image fallback, recipe grid, and corrected dialog unchanged.
+- Added a forest-green header with cream branding, readable supporting text, and a Recipes link to the new stable #recipes results anchor. Header can wrap at narrow widths.
+- Added a green section divider, forest-green initial-results panel with serif introductory text and a single accent line, and a pale-green normal empty/loading-status background. Existing error styling and status messages retained.
+- Added a solid 3px rounded search-container outline through :focus-within. Suppressed only the search input's inner outline; the submit button and other controls keep their existing focus outlines. Header links use a contrasting peach outline.
+- Added exactly six native, labeled type=button meal-name shortcuts in a named group, with wrapping layout and 44px minimum height. Hover/focus states use forest green; navigation feedback is restrained. Preserved existing card hover/focus feedback and global reduced-motion rules rather than adding extra motion.
+- Appended one delegated shortcut click handler: populate the existing input, clear stale custom validity, and call form.requestSubmit(). This routes requests through the unchanged existing submit/API/state logic.
+- Increased header supporting text/search hint and status typography. No new endpoints, extra fetch path, dependencies, storage, accounts, backend, lessons, or unrelated features.
+
+Actual verification results:
+- node --check script.js: passed (exit code 0).
+- Existing Node VM/simulated-DOM/mocked-fetch regression harness passed blank-query validation, query encoding, safe API text, ingredient pairing/blank skipping, full instructions, focus restoration handler, null results, HTTP/network/JSON/schema errors, missing fields, and stale-result protection.
+- Additional simulated shortcut tests passed all six meal names: each populated the input and submitted exactly once through the existing form handler, used the expected search.php?s= URL, and cleared stale custom validity. Group-background clicks were ignored. Shortcut searches retained null-result messaging and network-error handling.
+- Verified all prior script.js content preserved verbatim before the appended shortcut handler. Source still contains one existing awaited fetch path; no separate shortcut search logic added.
+- Existing tinycss2 parsed CSS and nested rules without parser errors. Parsed-rule comparisons confirmed split hero/photo, dialog/image layout, grid, card feedback, and reduced-motion declarations unchanged.
+- Code-level focus assertions passed: rounded container has a solid 3px green outline and 4px offset; input-only outline suppression is scoped to search-controls; global button/link focus outlines remain present. Header/shortcut wrapping and shortcut minimum target height assertions passed.
+- Limited HTML structural checks passed six labeled native shortcut buttons, unique IDs, valid label targets, resolving #recipes and skip-link anchors, preserved decorative image URL/alt handling, and unchanged dialog markup. These are not browser accessibility tests or full HTML validation.
+- README.md and .gitignore unchanged. Inspected full HTML/CSS/JS before/after diffs.
+- Declared-color contrast calculations passed: cream/forest green 10.87:1; secondary header/panel text/forest green 8.75:1; peach/forest green 6.24:1; forest green/pale green 10.26:1; white/forest green 11.84:1. These are calculations, not rendered browser contrast tests.
+- No automated check failed. No browser testing or live API request performed in this iteration. Actual desktop/mobile layout, Recipes anchor scrolling, keyboard focus appearance, native shortcut activation/form submission, and visual balance remain for browser review.
+- Files changed: index.html, style.css, script.js, prompt_log.txt. No commit created. Stopped for browser review.
+
+
+FIRST GIT MILESTONE PREPARATION — NO STAGING OR COMMIT
+Date: 2026-10-08
+
+User request:
+- V8 visual review completed. Inspect all files/Git state, rerun syntax and regression checks, review ignore rules, bring README into alignment with shortcuts/navigation, review V1–V8 history and actual evidence, and report proposed staging files and outstanding concerns. Stop before staging or committing; do not change working functionality or add features.
+
+Documentation review:
+- README was stale: it omitted V8 shortcuts/navigation and still said browser/live testing had not occurred without distinguishing user-reported results from agent checks. Updated usage, file list, hero-image provenance, verification boundaries, and manual review checklist.
+- Preserved all previous prompt log entries. Available history records the initial build and approval, audit and V3 corrections, ingredient-slot/home-link defects, the observed image-overlap defect and correction, the pre-V7 visual pass (later referred to as V6 in the V7 prompt), and explicit V7/V8 prompts, changes, checks, and limitations.
+- V1, V2, V4, and V5 were not explicitly numbered in the supplied earlier prompts/log entries. No missing version prompts, retrospective numbering, test outcomes, or reflections were fabricated. Exact labels for those historical versions remain unconfirmed if a numbered V1–V8 index is required.
+- Rechecked earlier AssertionError explanation: initial static check could not resolve the generated recipe-title. Adjusted checks account for its JavaScript creation; this does not establish browser accessibility. Historical harness/contrast failures and their corrections remain recorded.
+
+Manual evidence supplied by the user:
+- Earlier report: live recipe search and recipe dialog testing passed; the image-overlap correction was visually verified.
+- Current report: “Fresh Out Kitchen V8 has completed visual review.” No detailed checklist, browser names, viewport sizes, or additional pass/fail outcomes were supplied. Recorded completion without inventing individual results.
+
+Actual checks during preparation:
+- node --check script.js passed (exit code 0).
+- Existing temporary Node VM/simulated-DOM/mocked-fetch regression harness passed blank-query validation, URL encoding, literal API text, ingredient pairing/blank skipping, full instructions, focus restoration handler, null results, HTTP/network/JSON/schema errors, missing fields, and stale-success protection.
+- Additional simulated checks passed ingredient-only records/pairing in each slot 1–20, a recipe containing only ingredient20, all six shortcuts through the existing submit handler, stale-validity clearing, ignored shortcut-group background clicks, missing/disallowed/failed image fallbacks, previous-request abort, and stale-failure protection.
+- Existing tinycss2 parsed stylesheet and nested rule declarations without parser errors. Limited HTML checks passed unique IDs, label/anchor targets (with generated recipe-title allowance), shortcut button semantics, preserved verified hero image reference, and local script/stylesheet existence. Not full HTML validation.
+- .gitignore exact content and behavior passed for .env, .env.local, .env.production, node_modules/example.js, .DS_Store, and nested environment/macOS metadata paths; .env.example is not ignored (expected check-ignore exit code 1). No test credential/dependency files created.
+- Project inventory: exactly six root project files; no .env file. Git has no commits yet on main, no tracked files, and an empty index. All six files remain untracked.
+- Limited known-secret-pattern scan found no matches in the six files. This is not comprehensive secret detection; source inspection found only the shared public development key 1 and public image/API URLs.
+- No browser testing or live API request performed during milestone preparation. Automated regression tests are simulated. Temporary test harness remains outside the repository and is not proposed for staging.
+
+Proposed baseline (not staged):
+.gitignore
+README.md
+index.html
+prompt_log.txt
+script.js
+style.css
+
+Outstanding evidence:
+- Detailed V8 browser/viewport, shortcut/navigation, keyboard/focus, mobile/zoom, offline/error, image-failure, and screen reader outcomes were not supplied. Do not interpret the completed visual review as evidence that every manual scenario passed.
+- Exact earlier V1/V2/V4/V5 version labels were not supplied. The factual chronological history is preserved without invented labeling.
+- Runtime limitations remain third-party network/data availability, modern browser support, no offline storage, and no comprehensive HTML/accessibility audit.
+
+Actions restricted to README.md and this appended log. No application functionality or ignore rules changed. No feature/dependency introduced. No staging or commit performed. Awaiting user review of the proposed baseline.
+- Final verification after documentation updates passed README coverage for all six shortcuts, Recipes navigation, shared test key, and user-reported evidence; whitespace scan across all six files; unchanged SHA-256 hashes for index.html/style.css/script.js/.gitignore; empty Git index. git diff --check returned exit code 0, with explicit whitespace scanning covering untracked contents. Final status: no commits yet on main; all six proposed files untracked.

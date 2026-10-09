@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#183e32">
+  <meta name="description" content="Find a recipe, gather your ingredients, and make something delicious. Simple recipe discovery for everyday cooks.">
+  <title>Fresh Out Kitchen — Find your next meal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./index.html" aria-label="Fresh Out Kitchen home"><span class="brand-mark" aria-hidden="true">f<span>o</span></span> Fresh Out Kitchen<span class="brand-dot" aria-hidden="true">.</span></a>
+    <span class="header-note">Good food starts here.</span>
+    <nav aria-label="Main navigation"><a class="nav-link" href="#recipes">Recipes</a></nav>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span aria-hidden="true">✳</span> A little inspiration. A delicious beginning.</p>
+        <h1 id="hero-title">Your next great meal<br>starts with <em>a search.</em></h1>
+        <p class="hero-description">New to cooking? Right at home here.<br>Find a recipe you love, grab your ingredients, and let’s get cooking.</p>
+        <form id="search-form" class="search-form" role="search">
+          <label for="meal-search">What would you like to cook?</label>
+          <div class="search-controls">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+            <input id="meal-search" name="meal" type="search" placeholder="Try chicken, pasta, or curry…" required maxlength="100" autocomplete="off">
+            <button class="search-button" type="submit">Find recipes <span aria-hidden="true">↗</span></button>
+          </div>
+        </form>
+        <div id="meal-shortcuts" class="meal-shortcuts" role="group" aria-label="Quick meal-name searches">
+          <button type="button" data-meal="Chicken" aria-label="Search recipes for Chicken">Chicken</button>
+          <button type="button" data-meal="Pasta" aria-label="Search recipes for Pasta">Pasta</button>
+          <button type="button" data-meal="Rice" aria-label="Search recipes for Rice">Rice</button>
+          <button type="button" data-meal="Beef" aria-label="Search recipes for Beef">Beef</button>
+          <button type="button" data-meal="Soup" aria-label="Search recipes for Soup">Soup</button>
+          <button type="button" data-meal="Egg" aria-label="Search recipes for Egg">Egg</button>
+        </div>
+        <p class="search-hint">Search by meal name. Keep it simple, keep it delicious.</p>
+      </div>
+      <!-- Decorative photograph verified on TheMealDB’s Chicken Mandi meal page. -->
+      <div class="hero-photo" aria-hidden="true">
+        <img id="hero-image" src="https://www.themealdb.com/images/media/meals/er4d081765186828.jpg" alt="" width="700" height="700" fetchpriority="high">
+      </div>
+    </section>
+    <section id="recipes" class="results-section" aria-labelledby="results-heading">
+      <div class="section-heading"><h2 id="results-heading">Something delicious awaits</h2><span id="results-count"></span></div>
+      <p id="search-status" class="status initial-state" role="status" aria-live="polite" aria-atomic="true"><span class="status-title">A fresh start for your next meal.</span><span class="status-description">Search for a meal you love, or choose a name above. Your next recipe starts here.</span></p>
+      <div id="recipe-grid" class="recipe-grid" aria-busy="false"></div>
+    </section>
+  </main>
+  <footer><span class="footer-brand">Fresh Out Kitchen.</span><p>Made for curious cooks. Recipes from <a href="https://www.themealdb.com/" target="_blank" rel="noopener noreferrer">TheMealDB<span class="visually-hidden"> (opens in a new tab)</span></a>.</p></footer>
+  <dialog id="recipe-dialog" aria-labelledby="recipe-title">
+    <div class="dialog-toolbar"><span class="eyebrow">Let’s get cooking</span><button id="close-recipe" class="close-button" type="button" autofocus>Close <span aria-hidden="true">×</span></button></div>
+    <div id="recipe-content"></div>
+  </dialog>
+</body>
+</html>
