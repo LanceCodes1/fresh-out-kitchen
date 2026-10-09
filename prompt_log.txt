@@ -21,7 +21,9 @@ Create a polished culinary interface with warm cream backgrounds, deep forest gr
 
 IMPLEMENTATION
 - Use index.html, style.css, and script.js.
-- Use fetch with async/await.
+- Usi fetch won and Codex correction"
+git push origin main
+git statusith async/await.
 - Use TheMealDB public API without adding a backend.
 - Map strIngredient1 through strIngredient20 to their corresponding strMeasure fields, ignoring blank ingredients.
 - Safely render API content; avoid inserting untrusted API strings directly as HTML.
@@ -384,3 +386,23 @@ Evidence source: User's textual confirmation in this update. No screenshots supp
 Actions: Updated README verification notes and remaining manual-coverage list; appended this entry while preserving prior log entries. Previous statements about missing evidence remain historical records and are supplemented by these new user confirmations. No application tests were rerun and no browser/live API test was performed by the agent in this documentation-only update.
 
 Documentation verification: Passed exact changed-file comparison (README.md and prompt_log.txt only), prior-log prefix preservation, whitespace checks, and unchanged Git index. No staging, commit, push, or deployment performed.
+
+
+USER-PERFORMED MANUAL RECIPE DATA COMPARISON
+
+Prompt: Record the user's Chicken Handi comparison in prompt_log.txt and, if appropriate, README verification notes. Do not change application code, commit, or push; show the diff and stop.
+
+Evidence: The user reported manually comparing Chicken Handi in their deployed Fresh Out Kitchen app against TheMealDB's search.php?s=Chicken JSON response. They confirmed the recipe name, ingredients, measurements, and cooking instructions matched. This is user-performed manual verification, not an automated test or independent agent verification. No screenshot or JSON payload was supplied with this report.
+
+Actions: Added the reported result to README's user-performed verification table and appended this entry, preserving earlier log entries. Application code unchanged. No tests rerun, staging, commit, or push performed.
+
+
+V11 — MANUAL API VERIFICATION AND CAUGHT LAYOUT MISTAKE
+
+Prompt: Update only README.md and prompt_log.txt with the user's API comparison and caught layout mistake; avoid unnecessary duplication, preserve previous entries, show the exact diff, and do not modify application files, stage, commit, push, or deploy.
+
+User-performed activities (confirmed verbally):
+- API verification: The user opened TheMealDB's search.php?s=Chicken JSON response and compared Chicken Handi (idMeal 52795) with the deployed app. Recipe name, ingredients, measurements, and instructions matched. This was manual verification, not an automated test or independent agent test.
+- Caught mistake: While testing the functioning recipe-detail dialog, the user noticed the recipe image overlapping other content, directed Codex to correct the layout, and visually checked that the overlap was resolved. This demonstrates why inspecting the user experience matters beyond checking whether code runs.
+
+Actions: Refined the existing README API-comparison row with the meal ID and replaced its brief overlap reference with the supplied observation; appended this V11 entry without changing earlier log entries. No screenshots or JSON payload supplied in this update. No application tests rerun or claims of reviewing every diff. No application-file edits, staging, commit, push, or deployment.

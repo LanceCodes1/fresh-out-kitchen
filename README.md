@@ -67,8 +67,9 @@ User-performed browser evidence (confirmed verbally by the user; no screenshots 
 | Chrome DevTools Offline | API requests failed and the app displayed a friendly connection-error message. |
 | Network restored | Chicken search succeeded with HTTP 200 and recipe cards reappeared. |
 | Earlier browser tests | Pasta shortcut, Recipes navigation, and recipe dialog passed. |
+| Chicken Handi API comparison | User opened TheMealDB’s `search.php?s=Chicken` JSON response and compared Chicken Handi (`idMeal` 52795) with the deployed app. The recipe name, ingredients, measurements, and instructions matched. This was user-performed manual verification, not an automated test. |
 
-Earlier user reports also confirmed live recipe search/dialog testing and visual verification of the photograph-overlap correction. V8 visual review was reported completed. These are user-performed results, not independent agent browser tests. No screenshot-based conclusion is added here. Browser versions, device details, and checks beyond the reported scenarios remain unspecified.
+While testing the functioning recipe-detail dialog, the user caught the photograph overlapping other content, directed Codex to correct the layout, and visually checked that the overlap was resolved. This demonstrates why inspecting the user experience matters beyond checking whether code runs. Earlier user reports also confirmed live recipe search/dialog testing, and V8 visual review was reported completed. These are user-performed results, not independent agent browser tests. No screenshot-based conclusion is added here. Browser versions, device details, and checks beyond the reported scenarios remain unspecified.
 
 Remaining manual coverage to document:
 
