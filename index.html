@@ -22,6 +22,7 @@
         <p class="eyebrow"><span aria-hidden="true">✳</span> A little inspiration. A delicious beginning.</p>
         <h1 id="hero-title">Your next great meal<br>starts with <em>a search.</em></h1>
         <p class="hero-description">New to cooking? Right at home here.<br>Find a recipe you love, grab your ingredients, and let’s get cooking.</p>
+        <!-- Typed searches and meal-name shortcuts use the same submit handler. -->
         <form id="search-form" class="search-form" role="search">
           <label for="meal-search">What would you like to cook?</label>
           <div class="search-controls">
@@ -45,6 +46,7 @@
         <img id="hero-image" src="https://www.themealdb.com/images/media/meals/er4d081765186828.jpg" alt="" width="700" height="700" fetchpriority="high">
       </div>
     </section>
+    <!-- JavaScript updates the live status and fills this grid with recipe buttons. -->
     <section id="recipes" class="results-section" aria-labelledby="results-heading">
       <div class="section-heading"><h2 id="results-heading">Something delicious awaits</h2><span id="results-count"></span></div>
       <p id="search-status" class="status initial-state" role="status" aria-live="polite" aria-atomic="true"><span class="status-title">A fresh start for your next meal.</span><span class="status-description">Search for a meal you love, or choose a name above. Your next recipe starts here.</span></p>
@@ -52,6 +54,7 @@
     </section>
   </main>
   <footer><span class="footer-brand">Fresh Out Kitchen.</span><p>Made for curious cooks. Recipes from <a href="https://www.themealdb.com/" target="_blank" rel="noopener noreferrer">TheMealDB<span class="visually-hidden"> (opens in a new tab)</span></a>.</p></footer>
+  <!-- A selected recipe is inserted here; the native dialog provides modal focus. -->
   <dialog id="recipe-dialog" aria-labelledby="recipe-title">
     <div class="dialog-toolbar"><span class="eyebrow">Let’s get cooking</span><button id="close-recipe" class="close-button" type="button" autofocus>Close <span aria-hidden="true">×</span></button></div>
     <div id="recipe-content"></div>

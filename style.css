@@ -389,6 +389,7 @@ h2 {
 }
 
 }
+/* Zero minimum column widths let long recipe names wrap without widening the grid. */
 .recipe-grid {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -485,6 +486,7 @@ footer p {
   color:var(--muted)
 }
 
+/* Keep long recipes scrollable inside a dialog that fits the viewport. */
 dialog {
   color:var(--green);
   background:var(--cream);
@@ -584,6 +586,7 @@ body.dialog-open {
   overflow:hidden
 }
 
+/* Give the search button its own row when the hero column becomes narrow. */
 @media(max-width:1100px) {
   .hero .search-controls {
     flex-wrap:wrap;
@@ -595,6 +598,7 @@ body.dialog-open {
   }
 }
 
+/* Tablets use two recipe columns and stack the hero and recipe details. */
 @media(max-width:800px) {
   .recipe-grid {
   grid-template-columns:repeat(2,minmax(0,1fr))
@@ -617,6 +621,7 @@ body.dialog-open {
 
 }
 
+/* Phones use one recipe column and place the search button below the input. */
 @media(max-width:520px) {
   .site-header {
   padding:20px
@@ -700,6 +705,7 @@ dialog {
 
 }
 
+/* Respect users who prefer to avoid animated feedback. */
 @media(prefers-reduced-motion:reduce) {
   *,*::before,*::after {
   animation:none!important;

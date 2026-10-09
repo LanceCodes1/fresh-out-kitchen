@@ -1,6 +1,30 @@
 Fresh Out Kitchen — Prompt and implementation log
 
+SCAN GUIDE — CHRONOLOGICAL HISTORY
+----------------------------------
+The entries below retain the original chronology and wording, except the documented
+prompt transcription repair at the end. Historical outcomes belong to their own
+iteration; later user confirmations do not turn earlier simulations into browser tests.
+
+V1–V11 navigation (labels only where supported by the supplied history):
+  1. Initial build — original prompt, approved plan, implementation, and first checks.
+  2. V3 audit/corrections — ingredient-slot validation, home link, ignore rules.
+  3. Recipe detail layout correction — observed image overlap, cause, and correction.
+  4. Visual refinement — the design later referred to as V6 in the V7 prompt.
+  5. V7 — split hero and verified photograph.
+  6. V8 — forest-green styling, focus ring, shortcuts, and Recipes navigation.
+  7. First Git milestone preparation — documentation and verification review.
+  8. V10 — user-reported viewport, offline, recovery, and earlier browser results.
+  9. Manual recipe data comparison — user-reported Chicken Handi comparison.
+ 10. V11 — meal ID clarification and the user's caught layout mistake.
+
+The 1–10 list numbers indicate reading order, not version numbers. Exact V1, V2,
+V4, V5, and V9 labels were not supplied; no missing version prompts are invented.
+Each entry keeps its prompts, decisions, corrections, and verification limits together.
+
+========================================================================
 INITIAL BUILD ITERATION
+========================================================================
 Date: 2026-10-08
 
 Original implementation prompt (verbatim):
@@ -21,9 +45,7 @@ Create a polished culinary interface with warm cream backgrounds, deep forest gr
 
 IMPLEMENTATION
 - Use index.html, style.css, and script.js.
-- Usi fetch won and Codex correction"
-git push origin main
-git statusith async/await.
+- Use fetch with async/await.
 - Use TheMealDB public API without adding a backend.
 - Map strIngredient1 through strIngredient20 to their corresponding strMeasure fields, ignoring blank ingredients.
 - Safely render API content; avoid inserting untrusted API strings directly as HTML.
@@ -80,7 +102,9 @@ Actual verification evidence:
 - Final git status --short: all five files remain untracked (?? README.md, ?? index.html, ?? prompt_log.txt, ?? script.js, ?? style.css).
 
 
+========================================================================
 V3 AUDIT AND APPROVED CORRECTIONS
+========================================================================
 Date: 2026-10-08
 
 Audit findings:
@@ -114,7 +138,9 @@ Actual correction verification results:
 - No commit created. Final Git status: ?? .gitignore, ?? README.md, ?? index.html, ?? prompt_log.txt, ?? script.js, ?? style.css. Awaiting browser verification.
 
 
+========================================================================
 RECIPE DETAIL LAYOUT CORRECTION
+========================================================================
 Date: 2026-10-08
 
 User-reported browser observation:
@@ -142,7 +168,9 @@ Actual verification evidence:
 - No automated check failed. No browser test or live API request was performed. Actual photograph containment, dialog scrolling, responsive rendering, and keyboard behavior require browser retesting.
 - Updated only style.css and this log for this correction. No commit created. Awaiting browser retesting, especially Chicken Mandi on mobile and desktop with long instructions and keyboard navigation.
 
+========================================================================
 SINGLE VISUAL-REFINEMENT ITERATION
+========================================================================
 Date: 2026-10-08
 
 User-reported verification before this iteration:
@@ -173,7 +201,9 @@ Actual verification results:
 - No browser test or live API request was performed by the agent in this iteration. Actual visual hierarchy, mobile overflow, focus appearance, and dialog regression need user browser review.
 - Updated only style.css and this log. No feature, dependency, image source, backend, or commit added. Stopped for browser review after this single visual iteration.
 
+========================================================================
 V7 PREMIUM SPLIT HERO REFINEMENT
+========================================================================
 Date: 2026-10-08
 
 User prompt (verbatim):
@@ -260,7 +290,9 @@ Actual verification results:
 - No application browser test performed in this iteration; desktop/mobile composition, actual hero load/failure, visual crop, overflow, and keyboard behavior remain for user browser review.
 - Files changed: index.html, style.css, script.js, prompt_log.txt. No commit created. Stopped for browser review.
 
+========================================================================
 V8 FINAL UI REFINEMENT
+========================================================================
 Date: 2026-10-08
 
 User prompt (verbatim):
@@ -326,7 +358,9 @@ Actual verification results:
 - Files changed: index.html, style.css, script.js, prompt_log.txt. No commit created. Stopped for browser review.
 
 
+========================================================================
 FIRST GIT MILESTONE PREPARATION — NO STAGING OR COMMIT
+========================================================================
 Date: 2026-10-08
 
 User request:
@@ -369,7 +403,9 @@ Actions restricted to README.md and this appended log. No application functional
 - Final verification after documentation updates passed README coverage for all six shortcuts, Recipes navigation, shared test key, and user-reported evidence; whitespace scan across all six files; unchanged SHA-256 hashes for index.html/style.css/script.js/.gitignore; empty Git index. git diff --check returned exit code 0, with explicit whitespace scanning covering untracked contents. Final status: no commits yet on main; all six proposed files untracked.
 
 
+========================================================================
 V10 — USER-PERFORMED BROWSER VERIFICATION DOCUMENTATION
+========================================================================
 Date: 2026-10-08
 
 Prompt: Update only README.md and prompt_log.txt with the supplied user-performed browser tests; distinguish screenshots from verbal confirmations, invent no missing evidence, and do not modify application files, stage, commit, push, or deploy.
@@ -388,7 +424,9 @@ Actions: Updated README verification notes and remaining manual-coverage list; a
 Documentation verification: Passed exact changed-file comparison (README.md and prompt_log.txt only), prior-log prefix preservation, whitespace checks, and unchanged Git index. No staging, commit, push, or deployment performed.
 
 
+========================================================================
 USER-PERFORMED MANUAL RECIPE DATA COMPARISON
+========================================================================
 
 Prompt: Record the user's Chicken Handi comparison in prompt_log.txt and, if appropriate, README verification notes. Do not change application code, commit, or push; show the diff and stop.
 
@@ -397,7 +435,9 @@ Evidence: The user reported manually comparing Chicken Handi in their deployed F
 Actions: Added the reported result to README's user-performed verification table and appended this entry, preserving earlier log entries. Application code unchanged. No tests rerun, staging, commit, or push performed.
 
 
+========================================================================
 V11 — MANUAL API VERIFICATION AND CAUGHT LAYOUT MISTAKE
+========================================================================
 
 Prompt: Update only README.md and prompt_log.txt with the user's API comparison and caught layout mistake; avoid unnecessary duplication, preserve previous entries, show the exact diff, and do not modify application files, stage, commit, push, or deploy.
 
@@ -406,3 +446,46 @@ User-performed activities (confirmed verbally):
 - Caught mistake: While testing the functioning recipe-detail dialog, the user noticed the recipe image overlapping other content, directed Codex to correct the layout, and visually checked that the overlap was resolved. This demonstrates why inspecting the user experience matters beyond checking whether code runs.
 
 Actions: Refined the existing README API-comparison row with the meal ID and replaced its brief overlap reference with the supplied observation; appended this V11 entry without changing earlier log entries. No screenshots or JSON payload supplied in this update. No application tests rerun or claims of reviewing every diff. No application-file edits, staging, commit, push, or deployment.
+
+
+========================================================================
+INSTRUCTOR READABILITY PASS — COMMENTS AND LOG FORMATTING ONLY
+========================================================================
+
+Request: Add sparse, plain-English comments explaining important application
+structure/behavior; make V1–V11 easier to scan while preserving prompts, decisions,
+corrections, chronology, and actual evidence. Change no functionality, CSS behavior,
+dependencies, or HTML structure. Show changes and stop without staging or publishing.
+
+Actions:
+- Added HTML comments identifying the shared search form, dynamic results, and dialog.
+- Added CSS comments explaining grid sizing, dialog scrolling, responsive breakpoints,
+  and reduced-motion handling. Existing helpful comments retained.
+- Added JavaScript comments explaining reused recipe data, keyboard-operable cards,
+  URL encoding, HTTP checks, response validation, and cancelled/outdated searches.
+- Added a chronological scan guide and consistent entry dividers. Kept prior entry
+  wording and order, with the single transcription repair documented below. No
+  version assignments, browser evidence, or personal experiences were invented.
+
+Original-prompt transcription repair:
+- Inspection found a garbled passage where the initial implementation prompt's fetch
+  instruction should be. Restored “- Use fetch with async/await.” from the actual
+  original user message in this conversation. Retained the pre-repair passage here
+  verbatim as an archival note; these lines are not newly executed commands:
+
+- Usi fetch won and Codex correction"
+git push origin main
+git statusith async/await.
+
+Actual checks:
+- node --check script.js passed (exit code 0).
+- Existing temporary simulated-DOM/mocked-fetch regression harness passed blank-query
+  handling, URL encoding, literal API text, ingredient pairing/blank skipping, full
+  instructions, focus restoration handler, null results, HTTP/network/JSON/schema
+  errors, missing fields, and stale-result protection. Not a browser test.
+- Removing standalone comments from both before/after application files produced
+  byte-for-byte identical HTML, CSS, and JavaScript. No markup, rules, or code changed.
+- Removing the scan guide/dividers reproduced every previous log entry in order,
+  except the explicitly repaired prompt line. The garbled passage is archived above.
+- README.md and .gitignore remained unchanged; Git index unchanged. No application
+  browser tests or live API requests performed. No staging, commit, push, or deployment.

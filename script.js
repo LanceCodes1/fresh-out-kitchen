@@ -53,6 +53,7 @@ function mealPhoto(meal, detail = false) {
   return container;
 }
 
+// The search response includes recipe details, so opening a card needs no new request.
 function showRecipe(meal, card) {
   selectedCard = card;
   const title = element('h2', 'recipe-title', cleanText(meal.strMeal) || 'Untitled recipe');
@@ -82,6 +83,7 @@ function showRecipe(meal, card) {
   document.body.classList.add('dialog-open');
 }
 
+// Render each card as a button so it can be opened with the keyboard.
 function renderMeals(meals) {
   const fragment = document.createDocumentFragment();
   for (const meal of meals) {
@@ -122,9 +124,12 @@ form.addEventListener('submit', async (event) => {
   heading.textContent = 'Finding your next meal';
   showStatus(`Searching for “${query}”…`, 'loading');
   try {
+    // Encode the meal name so spaces and punctuation stay inside the search value.
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(query)}`, { signal: controller.signal });
+    // fetch can resolve on an HTTP failure; check the status before reading JSON.
     if (!response.ok) throw new Error('HTTP error');
     const data = await response.json();
+    // Accept meals: null as no matches, but reject unexpected response shapes.
     if (!data || typeof data !== 'object' || !Object.hasOwn(data, 'meals') || (data.meals !== null && !Array.isArray(data.meals))) {
       throw new Error('Unexpected API response');
     }
@@ -150,6 +155,7 @@ form.addEventListener('submit', async (event) => {
     status.textContent = `Found ${count.textContent} for “${query}”. Select a recipe to see how to make it.`;
     status.className = 'visually-hidden';
   } catch (error) {
+    // Cancelled or outdated searches must not replace the latest search message.
     if (controller !== activeController || error.name === 'AbortError') return;
     heading.textContent = 'Let’s try that again';
     showStatus('We couldn’t load recipes. Check your connection and try your search again.', 'error');
